@@ -6,7 +6,7 @@ const FilterItem = (props) => {
 
   return (
     <div>
-        <label for="filterItem" >{label}</label>
+        <label htmlFor="filterItem" >{label}</label>
         <input type="checkbox" name="filterItem" />
     </div>
   )
