@@ -30,8 +30,8 @@ function App() {
 
   return (
     <div className="App">
-      <NavBar filters={filters} />
-      <BeerDisplay />
+      <NavBar filters={filters} toggleFilter={setFilters} setSearchCriteria={setSearchCriteria} />
+      <BeerDisplay beers={filteredBeers} searchCriteria={searchCriteria} />
     </div>
   );
 }
