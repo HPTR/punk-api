@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import './App.scss';
+import './assets/sass/reset.scss'
 import beers from "./data/beers";
 
 import NavBar from "./containers/NavBar/NavBar";
