@@ -7,9 +7,22 @@ import BeerDisplay from "./containers/BeerDisplay/BeerDisplay";
 
 function App() {
 
-  const [filterQuery, setfilterQuery] = useState([])
-  const [searchCriteria, setsearchCriteria] = useState("");
-  const [filters, setfilters] = useState(['High ABV (> 6.0%)', 'Classic Range', 'Acidic (ph < 4)'])
+  const filtersArr = [{
+    query: 'High ABV (> 6.0%)',
+    enabled: false
+  },
+  {
+    query: 'Classic Range',
+    enabled: false
+  },
+  {
+    query: 'Acidic (Ph < 4)',
+    enabled: false
+  }
+]
+
+  const [filters, setFilters] = useState(filtersArr)
+  const [searchCriteria, setSearchCriteria] = useState("");
 
   const filteredBeers = beers.filter(beer => {
     return beer
