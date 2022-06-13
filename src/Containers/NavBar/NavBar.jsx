@@ -1,11 +1,14 @@
-import React, { useState } from 'react'
+import SearchBox from "../../components/SearchBox/SearchBox";
+import FiltersList from "../../components/FiltersList/FiltersList";
 
-const NavBar = () => {
+const NavBar = (props) => {
 
-
+    const { filters } = props;
 
   return (
     <div>
+        <SearchBox />
+        <FiltersList filters={filters} />
     </div>
   )
 }
