@@ -2,12 +2,12 @@ import React from 'react'
 
 const FilterItem = (props) => {
 
-    const {label} = props;
+    const {label, handleCheck} = props;
 
   return (
     <div>
         <label htmlFor="filterItem" >{label}</label>
-        <input type="checkbox" name="filterItem" />
+        <input value={label} type="checkbox" onChange={handleCheck} name="filterItem" />
     </div>
   )
 }
