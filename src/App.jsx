@@ -36,6 +36,9 @@ function App() {
     }
     setActiveFilters(updatedList);
   };
+
+  const handleSearchChange = (event) => {
+    setSearchCriteria(event.target.value);
   }
 ]
 
