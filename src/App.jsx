@@ -1,24 +1,31 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import './App.scss';
 import './assets/sass/reset.scss'
-import beers from "./data/beers";
 
 import NavBar from "./containers/NavBar/NavBar";
 import BeerDisplay from "./containers/BeerDisplay/BeerDisplay";
 
 function App() {
 
-  const filtersArr = [{
-    query: 'High ABV (> 6.0%)',
-    enabled: false
-  },
-  {
-    query: 'Classic Range',
-    enabled: false
-  },
-  {
-    query: 'Acidic (Ph < 4)',
-    enabled: false
+  const [beers, setBeers] = useState([])
+  const [searchCriteria, setSearchCriteria] = useState("");
+  const filters = ['High ABV (> 6.0%)', 'Classic Range', 'Acidic (Ph < 4)']
+  const [activeFilters, setActiveFilters] = useState([])
+
+  const getBeers = async () => {
+    let allBeers = [];
+    for (let i = 1; i < 6; i++) {
+      const beersArr = await fetch(`https://api.punkapi.com/v2/beers?per_page=65&page=${i}`)
+      .then(response => response.json())
+      .then(data => data);
+      beersArr.forEach(beer => allBeers.push(beer))
+    }
+    setBeers(allBeers)
+  }
+
+  useEffect(() => {
+    getBeers()
+  }, []);
   }
 ]
 
