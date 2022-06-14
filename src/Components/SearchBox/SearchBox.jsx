@@ -1,9 +1,10 @@
 import React from 'react'
 
-const SearchBox = () => {
+const SearchBox = (props) => {
+  const { handleSearchChange } = props;
   return (
     <div>
-        <input type="text" />
+        <input type="text" onChange={handleSearchChange} />
     </div>
   )
 }
