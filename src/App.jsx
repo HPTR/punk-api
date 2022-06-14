@@ -26,6 +26,16 @@ function App() {
   useEffect(() => {
     getBeers()
   }, []);
+
+  const handleCheck = (event) => {
+    var updatedList = [...activeFilters];
+    if (event.target.checked) {
+      updatedList = [...activeFilters, event.target.value];
+    } else {
+      updatedList.splice(activeFilters.indexOf(event.target.value), 1);
+    }
+    setActiveFilters(updatedList);
+  };
   }
 ]
 
