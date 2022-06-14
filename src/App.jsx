@@ -40,14 +40,27 @@ function App() {
   const handleSearchChange = (event) => {
     setSearchCriteria(event.target.value);
   }
-]
 
-  const [filters, setFilters] = useState(filtersArr)
-  const [searchCriteria, setSearchCriteria] = useState("");
+  const filteredBeersBySearch = beers.filter(beer => beer.name.toLowerCase().includes(searchCriteria.toLowerCase()));
 
-  const filteredBeers = beers.filter(beer => {
-    return beer
-  });
+  const combinedArr = [];
+  const highAbv = filteredBeersBySearch.filter(beer => parseFloat(beer.abv) > 6);
+  const classic = filteredBeersBySearch.filter(beer => beer.first_brewed[5] === '0');
+  const acidic = filteredBeersBySearch.filter(beer => parseFloat(beer.ph) < 4);
+
+  if (activeFilters.includes('High ABV (> 6.0%)')) {
+    highAbv.forEach(beer => combinedArr.push(beer));
+  }
+
+  if (activeFilters.includes('Classic Range')) {
+    classic.forEach(beer => combinedArr.push(beer));
+  }
+
+  if (activeFilters.includes('Acidic (Ph < 4)')) {
+    acidic.forEach(beer => combinedArr.push(beer));
+  }
+  
+  const filteredBeersByCheckboxes = [...new Set(combinedArr)];
 
   return (
     <div className="App">
