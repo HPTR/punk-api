@@ -110,7 +110,8 @@ function App() {
 
 
   return (
-    <div className="App">
+    <div className="punk-api">
+      <h1 className='punk-api__heading'>Punk API</h1>
       <NavBar handleCheck={handleCheck} filterLabels={filterLabels} handleSearchChange={handleSearchChange} />
       <BeerDisplay beers={filteredBeers} />
     </div>
