@@ -8,7 +8,8 @@ const Card = (props) => {
     tagline,
     description,
     image,
-    abv
+    abv,
+    ph
   } = props;
 
   return (
@@ -18,6 +19,7 @@ const Card = (props) => {
       <h3 className='card__tagline'>{tagline}</h3>
       <p className='card__description'>{description}</p>
       <p className='card__abv'>{abv}</p>
+      <p>{ph}</p>
     </div>
   )
 }
