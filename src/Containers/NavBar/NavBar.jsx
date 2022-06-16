@@ -3,12 +3,12 @@ import FiltersList from "../../components/FiltersList/FiltersList";
 
 const NavBar = (props) => {
 
-    const { filters, handleSearchChange, handleCheck } = props;
+    const { filterLabels, handleSearchChange, handleCheck } = props;
 
   return (
     <div>
         <SearchBox handleSearchChange={handleSearchChange} />
-        <FiltersList handleCheck={handleCheck} filters={filters} />
+        <FiltersList handleCheck={handleCheck} filterLabels={filterLabels} />
     </div>
   )
 }

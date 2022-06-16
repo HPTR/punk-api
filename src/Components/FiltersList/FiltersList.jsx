@@ -3,12 +3,12 @@ import FilterItem from '../FilterItem/FilterItem'
 
 const FiltersList = (props) => {
 
-    const { filters, handleCheck } = props
+    const { filterLabels, handleCheck } = props
 
   return (
     <div>
-        {filters.map((filter, index) => {
-            return <FilterItem label={filter} key={index} handleCheck={handleCheck} />
+        {filterLabels.map((filter, index) => {
+            return <FilterItem label={filter.label} key={index} handleCheck={handleCheck} filter={filter.filter} />
         })}
     </div>
   )
