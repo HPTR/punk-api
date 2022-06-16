@@ -9,8 +9,24 @@ function App() {
 
   const [beers, setBeers] = useState([])
   const [searchCriteria, setSearchCriteria] = useState("");
-  const filters = ['High ABV (> 6.0%)', 'Classic Range', 'Acidic (Ph < 4)']
-  const [activeFilters, setActiveFilters] = useState([])
+  const filterLabels = [{
+    label: 'High ABV (> 6.0%)',
+    filter: 'abv'
+  },
+  {
+    label: 'Classic Range',
+    filter: 'first_brewed'
+  },
+  {
+    label: 'Acidic (Ph < 4)',
+    filter: 'ph'
+  }];
+  const [filteredBeers, setFilteredBeers] = useState([]);
+  const [filters, setFilters] = useState({
+    abv: '',
+    first_brewed: '',
+    ph: ''
+  })
 
   const getBeers = async () => {
     let allBeers = [];
@@ -21,51 +37,82 @@ function App() {
       beersArr.forEach(beer => allBeers.push(beer))
     }
     setBeers(allBeers)
+    setFilteredBeers(allBeers)
   }
 
   useEffect(() => {
     getBeers()
   }, []);
 
+  useEffect(() => {
+    setFilteredBeers(filterArray(beers, filters))
+  }, [filters, searchCriteria])
+
   const handleCheck = (event) => {
-    var updatedList = [...activeFilters];
+    const selectedFilter = event.target.dataset.filter;
+    //I want to give each checkbox a prop to match the key in the new filter object
+    //the plan being to use that in an if statement to set the state
+    //just need to figure out how to get that info to the checkbox
+    const updatedState = {...filters};
+
     if (event.target.checked) {
-      updatedList = [...activeFilters, event.target.value];
+      switch (selectedFilter) {
+        case 'abv':
+          updatedState.abv = abv => parseFloat(abv) > 6;
+          setFilters(updatedState);
+          break;
+        case 'first_brewed':
+          updatedState.first_brewed = first_brewed => first_brewed[5] === '0';
+          setFilters(updatedState);
+          break;
+        case 'ph':
+          updatedState.ph = ph => parseFloat(ph) < 4;
+          setFilters(updatedState);
+          break;
+        default:
+          console.log("oh no");
+      }
     } else {
-      updatedList.splice(activeFilters.indexOf(event.target.value), 1);
+      switch (selectedFilter) {
+        case 'abv':
+          updatedState.abv = '';
+          setFilters(updatedState);
+          break;
+        case 'first_brewed':
+          updatedState.first_brewed = '';
+          setFilters(updatedState);
+          break;
+        case 'ph':
+          updatedState.ph = '';
+          setFilters(updatedState);
+          break;
+        default:
+          console.log("oh no");
+      }
     }
-    setActiveFilters(updatedList);
   };
 
   const handleSearchChange = (event) => {
     setSearchCriteria(event.target.value);
   }
 
-  const filteredBeersBySearch = beers.filter(beer => beer.name.toLowerCase().includes(searchCriteria.toLowerCase()));
-
-  const combinedArr = [];
-  const highAbv = filteredBeersBySearch.filter(beer => parseFloat(beer.abv) > 6);
-  const classic = filteredBeersBySearch.filter(beer => beer.first_brewed[5] === '0');
-  const acidic = filteredBeersBySearch.filter(beer => parseFloat(beer.ph) < 4);
-
-  if (activeFilters.includes('High ABV (> 6.0%)')) {
-    highAbv.forEach(beer => combinedArr.push(beer));
+  function filterArray(array, filters) {
+    const filterKeys = Object.keys(filters);
+    return array.filter(item => {
+      // validates all filter criteria
+      return filterKeys.every(key => {
+        // ignores non-function predicates
+        if (typeof filters[key] !== 'function') return true;
+        return filters[key](item[key]);
+      });
+    });
   }
 
-  if (activeFilters.includes('Classic Range')) {
-    classic.forEach(beer => combinedArr.push(beer));
-  }
-
-  if (activeFilters.includes('Acidic (Ph < 4)')) {
-    acidic.forEach(beer => combinedArr.push(beer));
-  }
-  
-  const filteredBeersByCheckboxes = [...new Set(combinedArr)];
 
   return (
     <div className="App">
-      <NavBar handleCheck={handleCheck} filters={filters} handleSearchChange={handleSearchChange} />
-      <BeerDisplay beers={activeFilters.length > 0 ? filteredBeersByCheckboxes : filteredBeersBySearch} searchCriteria={searchCriteria} />
+      <NavBar handleCheck={handleCheck} filterLabels={filterLabels} handleSearchChange={handleSearchChange} />
+      <BeerDisplay beers={filteredBeers} />
     </div>
   );
 }
