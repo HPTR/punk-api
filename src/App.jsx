@@ -3,7 +3,8 @@ import './App.scss';
 import './assets/sass/reset.scss'
 
 import NavBar from "./containers/NavBar/NavBar";
-import BeerDisplay from "./containers/BeerDisplay/BeerDisplay";
+import CardList from "./components/CardList/CardList";
+import BeerInfo from './containers/BeerInfo/BeerInfo';
 
 function App() {
 
@@ -50,9 +51,6 @@ function App() {
 
   const handleCheck = (event) => {
     const selectedFilter = event.target.dataset.filter;
-    //I want to give each checkbox a prop to match the key in the new filter object
-    //the plan being to use that in an if statement to set the state
-    //just need to figure out how to get that info to the checkbox
     const updatedState = {...filters};
 
     if (event.target.checked) {
