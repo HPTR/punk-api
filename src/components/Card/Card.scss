@@ -14,7 +14,12 @@
     background-color: $color-dark;
     margin: 15px 0px;
     padding: 30px;
-    
+    text-decoration: none;
+    color: $color-light;
+
+    &:visited {
+        color: $color-light;
+    }
 
     &__large-card-content {
         display: flex;
