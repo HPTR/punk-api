@@ -1,0 +1,34 @@
+@use '../../assets/sass/variables.scss' as *;
+
+.beer-info {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: 650px;
+    margin: 0px auto;
+    background-color: $color-primary;
+    font-size: 1.2rem;
+
+    &__image {
+        height: 200px;
+    }
+
+    &__text {
+        width: 70%;
+        margin-left: 80px;
+    }
+
+    &__name {
+        margin-top: 20px;
+    }
+
+    &__tagline {
+        margin-bottom: 20px;
+    }
+
+    &__list {
+        list-style-type: none;
+    }
+}
