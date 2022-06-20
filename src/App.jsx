@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import {BrowserRouter as Router, Routes, Route} from "react-router-dom";
 import './App.scss';
 import './assets/sass/reset.scss'
 
@@ -108,11 +109,16 @@ function App() {
 
 
   return (
-    <div className="punk-api">
-      <h1 className='punk-api__heading'>Punk API</h1>
-      <NavBar handleCheck={handleCheck} filterLabels={filterLabels} handleSearchChange={handleSearchChange} />
-      <BeerDisplay beers={filteredBeers} />
-    </div>
+    <Router>
+      <div className="punk-api">
+        <h1 className='punk-api__heading'>Punk API</h1>
+        <NavBar handleCheck={handleCheck} filterLabels={filterLabels} handleSearchChange={handleSearchChange} />
+        <Routes>
+          <Route path="/" element={<CardList beers={filteredBeers} />} />
+          <Route path="/beer/:beerId" element={<BeerInfo beers={beers} />} />
+        </Routes>
+      </div>
+    </Router>
   );
 }
 
