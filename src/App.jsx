@@ -97,7 +97,7 @@ function App() {
 
   function filterArray(array, filters) {
     const filterKeys = Object.keys(filters);
-    return array.filter(item => {
+    const checkboxFilter =  array.filter(item => {
       // validates all filter criteria
       return filterKeys.every(key => {
         // ignores non-function predicates
@@ -105,6 +105,7 @@ function App() {
         return filters[key](item[key]);
       });
     });
+    return checkboxFilter.filter(beer => beer.name.toLowerCase().includes(searchCriteria.toLowerCase()))
   }
 
 
