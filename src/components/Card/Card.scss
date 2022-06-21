@@ -13,12 +13,12 @@
     overflow: hidden;
     background-color: $color-dark;
     margin: 15px 0px;
-    padding: 30px;
+    padding: 20px;
     text-decoration: none;
-    color: $color-light;
+    color: $color-black;
 
     &:visited {
-        color: $color-light;
+        color: $color-black;
     }
 
     &__large-card-content {
@@ -32,6 +32,7 @@
 
     &__heading {
         text-align: left;
+        font-family: 'kabel-lt-std-black';
     }
 
     &__stats {
@@ -80,9 +81,19 @@
         transition: display 0.3s ease;
         opacity: 0;
         position: absolute;
+        font-family: "kabel-lt-std-black";
+        font-size: 4rem;
+        color: $color-darkest;
     }
 }
 
 .separator {
     border-bottom: 2px solid $color-light;
+}
+
+@media (max-width: 450px) {
+    .card {
+        padding: 5%;
+        width: 310px;
+    }
 }
