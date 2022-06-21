@@ -3,3 +3,10 @@ $color-dark: #57AAC2;
 $color-primary: #7CBED1;
 $color-light: #ACD4E2;
 $color-silver: #EFEEF1;
+$color-black: #000000;
+
+@font-face {
+    font-family: "kabel-lt-std-black";
+    src: local("kabel-lt-std-black"),
+     url("../../assets/fonts/KabelLTStd-Black.otf");
+    }
