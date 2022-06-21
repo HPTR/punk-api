@@ -1,6 +1,7 @@
 import React from 'react'
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import "./BeerInfo.scss"
+import back from "../../assets/images/back.png";
 
 const BeerInfo = (props) => {
 
@@ -10,6 +11,7 @@ const BeerInfo = (props) => {
 
     return (
     <div className="beer-info">
+        <Link to="/"><img className="beer-info__back" src={back} alt="Back" /></Link>
         <img className='beer-info__image' src={currentBeer.image_url} alt={currentBeer.name} />
         <div class="beer-info__text">
             <h2 className="beer-info__name">{currentBeer.name}</h2>
