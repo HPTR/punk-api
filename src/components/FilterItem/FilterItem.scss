@@ -6,8 +6,11 @@
     align-items: center;
     text-align: center;
     width: 70px;
+    font-weight: 600;
 
     &__checkbox {
         margin-top: 5px;
+        transform: scale(1.5);
+        border: none;
     }
 }
